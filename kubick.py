@@ -5,3 +5,47 @@
 # Вероятность выпадения каждого значения.
 # Максимальное количество подряд выпавших одинаковых значений.
 # Визуализируйте результаты в виде гистограммы.
+import matplotlib.pyplot as plt
+import numpy as np
+data = np.random.randint(1, 7, 1000)
+num = np.zeros(6)
+maxim = []
+for i in range(len(data)):
+    if data[i] == 1:
+        num[0] += 1
+    if data[i] == 2:
+        num[1] += 1
+    if data[i] == 3:
+        num[2] += 1
+    if data[i] == 4:
+        num[3] += 1
+    if data[i] == 5:
+        num[4] += 1
+    if data[i] == 6:
+        num[5] += 1
+k = 1
+for i in range(len(data)-1):
+    if data[i] == data[i+1]:
+        k+=1
+    else:
+        maxim.append(k)
+        k=1
+print(f'Кол-во выпадений 1: {int(num[0])}\n'
+      f'Кол-во выпадений 2: {int(num[1])}\n'
+      f'Кол-во выпадений 3: {int(num[2])}\n'
+      f'Кол-во выпадений 4: {int(num[3])}\n'
+      f'Кол-во выпадений 5: {int(num[4])}\n'
+      f'Кол-во выпадений 6: {int(num[5])}\n')
+print(f'Вероятность выпадения 1: {num[0]/10}%\n'
+      f'Вероятность выпадения 2: {num[1]/10}%\n'
+      f'Вероятность выпадения 3: {num[2]/10}%\n'
+      f'Вероятность выпадения 4: {num[3]/10}%\n'
+      f'Вероятность выпадения 5: {num[4]/10}%\n'
+      f'Вероятность выпадения 6: {num[5]/10}%\n'
+      f'Максимальное количество подряд выпавших одинаковых значений: {max(maxim)}')
+c = [1, 2, 3, 4, 5, 6]
+fig, ax = plt.subplots()
+plt.title("Кол-во выпадений значений на кубике")
+bar_data = ax.bar(c, num)
+ax.bar_label(bar_data)
+plt.show()
